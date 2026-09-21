@@ -1,0 +1,44 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "customstaller"
+version = "0.1.0"
+description = "Just drop, and install!"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Cuber cube", email = "cuberalted@gmail.com" }]
+keywords = ["installer", "setup", "wizard", "theme", "packaging"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Operating System :: OS Independent",
+  "Topic :: System :: Installation/Setup",
+]
+dependencies = [
+  "rich>=13.0",
+  "questionary>=2.0",
+  "tomli>=2.0; python_version < '3.11'",
+]
+
+[project.optional-dependencies]
+# A real desktop window instead of the browser fallback.
+window = ["pywebview>=5.0"]
+# Needed for `customstaller build` (turns the installer into a single executable).
+build = ["pyinstaller>=6.0"]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+customstaller = "customstaller.cli:main"
+cusinstal = "customstaller.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/customstaller"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[project.urls]
+Homepage = "https://github.com/cosmic4445/Customstaller"
+Issues = "https://github.com/cosmic4445/Customstaller/issues"
